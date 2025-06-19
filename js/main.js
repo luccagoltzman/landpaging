@@ -408,4 +408,71 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         showToast('Bem-vindo! Explore nosso site.');
     }, 1000);
-}); 
+});
+
+// Modal Controls
+document.addEventListener('DOMContentLoaded', () => {
+    // Mapeia os cards aos seus respectivos modais
+    const modalMap = {
+        'Desenvolvimento Web': 'modal-web',
+        'Apps Mobile': 'modal-mobile',
+        'Backend & APIs': 'modal-backend',
+        'Consultoria Técnica': 'modal-consultoria'
+    };
+
+    // Adiciona listeners para abrir os modais
+    document.querySelectorAll('.feature-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const title = card.querySelector('h3').textContent;
+            const modalId = modalMap[title];
+            if (modalId) {
+                const modal = document.getElementById(modalId);
+                openModal(modal);
+            }
+        });
+    });
+
+    // Adiciona listeners para fechar os modais
+    document.querySelectorAll('.modal-close').forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal');
+            closeModal(modal);
+        });
+    });
+
+    // Fecha o modal ao clicar fora dele
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal(modal);
+            }
+        });
+    });
+
+    // Fecha o modal com a tecla ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const activeModal = document.querySelector('.modal.active');
+            if (activeModal) {
+                closeModal(activeModal);
+            }
+        }
+    });
+});
+
+// Funções auxiliares para os modais
+function openModal(modal) {
+    modal.style.display = 'flex';
+    // Força um reflow antes de adicionar a classe active
+    modal.offsetHeight;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modal) {
+    modal.classList.remove('active');
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }, 300);
+} 
