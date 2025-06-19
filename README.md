@@ -39,7 +39,7 @@ landpaging/
 
 1. Clone o repositório:
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
+git clone [https://github.com/luccagoltzman/landpaging.git]
 ```
 
 2. Navegue até a pasta do projeto:
@@ -95,4 +95,4 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 ---
 
-Desenvolvido com ❤️ por [Seu Nome]
+Desenvolvido por [luccagoltzman]
