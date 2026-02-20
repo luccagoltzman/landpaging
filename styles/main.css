@@ -12,11 +12,11 @@
 html { scroll-behavior: smooth; }
 
 /* Animações de entrada (acionadas por JS) */
-.content { opacity: 0; transform: translateX(-20px); transition: opacity 3.8s ease 2.35s, transform 3.8s ease 2.35s; }
+.content { opacity: 0; transform: translateX(-20px); transition: opacity 1.8s ease 1.35s, transform 1.8s ease 1.35s; }
 .content.is-visible { opacity: 1; transform: translateX(0); }
-.hero-image { opacity: 0; transform: scale(0.96); transition: opacity 3.8s ease 2.6s, transform 3.8s ease 2.6s; }
+.hero-image { opacity: 0; transform: scale(0.96); transition: opacity 1.8s ease 1.6s, transform 1.8s ease 1.6s; }
 .hero-image.is-visible { opacity: 1; transform: scale(1); }
-.cards { opacity: 0; transform: translateY(20px); transition: opacity 3.6s ease, transform 3.6s ease; }
+.cards { opacity: 0; transform: translateY(20px); transition: opacity 1.6s ease, transform 1.6s ease; }
 .cards.is-visible { opacity: 1; transform: translateY(0); }
 .card:not(.is-visible) { opacity: 0; transform: translateY(16px); }
 .card.is-visible { opacity: 1; transform: translateY(0); }
