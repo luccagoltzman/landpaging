@@ -12,18 +12,18 @@
 html { scroll-behavior: smooth; }
 
 /* Animações de entrada (acionadas por JS) */
-.content { opacity: 0; transform: translateX(-20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.content { opacity: 0; transform: translateX(-20px); transition: opacity 3.8s ease 2.35s, transform 3.8s ease 2.35s; }
 .content.is-visible { opacity: 1; transform: translateX(0); }
-.hero-image { opacity: 0; transform: scale(0.96); transition: opacity 0.6s ease, transform 0.6s ease; }
+.hero-image { opacity: 0; transform: scale(0.96); transition: opacity 3.8s ease 2.6s, transform 3.8s ease 2.6s; }
 .hero-image.is-visible { opacity: 1; transform: scale(1); }
-.cards { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.cards { opacity: 0; transform: translateY(20px); transition: opacity 3.6s ease, transform 3.6s ease; }
 .cards.is-visible { opacity: 1; transform: translateY(0); }
 .card:not(.is-visible) { opacity: 0; transform: translateY(16px); }
 .card.is-visible { opacity: 1; transform: translateY(0); }
-.card.is-visible:nth-child(1) { transition-delay: 0.1s; }
-.card.is-visible:nth-child(2) { transition-delay: 0.15s; }
-.card.is-visible:nth-child(3) { transition-delay: 0.2s; }
-.card.is-visible:nth-child(4) { transition-delay: 0.25s; }
+.card.is-visible:nth-child(1) { transition-delay: 0.35s; }
+.card.is-visible:nth-child(2) { transition-delay: 0.7s; }
+.card.is-visible:nth-child(3) { transition-delay: 1.05s; }
+.card.is-visible:nth-child(4) { transition-delay: 1.4s; }
 
 @media (prefers-reduced-motion: reduce) {
     .content, .hero-image, .cards, .card { opacity: 1; transform: none; transition: none; }
@@ -240,12 +240,13 @@ body {
     border-radius: 16px;
     background: linear-gradient(141deg, rgba(89, 89, 89, 0.9) 0%, rgba(255, 255, 255, 0.25) 100%);
     cursor: pointer;
-    transition: opacity 0.5s ease, transform 0.3s ease-out, box-shadow 0.3s ease;
+    transition: opacity 1.6s ease, transform 1.6s ease-out, box-shadow 0.3s ease;
     transform-style: preserve-3d;
     backface-visibility: hidden;
 }
 
 .card:hover {
+    transition: opacity 0.2s ease, transform 0.3s ease-out, box-shadow 0.3s ease;
     transform: perspective(1000px) translateY(-8px) translateZ(0) rotateX(0deg) rotateY(0deg);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
 }
