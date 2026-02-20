@@ -11,6 +11,24 @@
 
 html { scroll-behavior: smooth; }
 
+/* Animações de entrada (acionadas por JS) */
+.content { opacity: 0; transform: translateX(-20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.content.is-visible { opacity: 1; transform: translateX(0); }
+.hero-image { opacity: 0; transform: scale(0.96); transition: opacity 0.6s ease, transform 0.6s ease; }
+.hero-image.is-visible { opacity: 1; transform: scale(1); }
+.cards { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.cards.is-visible { opacity: 1; transform: translateY(0); }
+.card:not(.is-visible) { opacity: 0; transform: translateY(16px); }
+.card.is-visible { opacity: 1; transform: translateY(0); }
+.card.is-visible:nth-child(1) { transition-delay: 0.1s; }
+.card.is-visible:nth-child(2) { transition-delay: 0.15s; }
+.card.is-visible:nth-child(3) { transition-delay: 0.2s; }
+.card.is-visible:nth-child(4) { transition-delay: 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .content, .hero-image, .cards, .card { opacity: 1; transform: none; transition: none; }
+}
+
 body {
     font-family: 'Bitter', serif;
     color: var(--text);
@@ -37,6 +55,7 @@ body {
     height: 218px;
     z-index: 0;
     pointer-events: none;
+    transition: transform 0.5s ease-out;
 }
 
 .circle-bg img {
@@ -67,6 +86,7 @@ body {
     color: var(--text);
     width: 639px;
     max-width: 100%;
+    transition: transform 0.3s ease, opacity 0.4s ease;
 }
 
 .content-subtitle {
@@ -77,6 +97,7 @@ body {
     color: var(--text);
     width: 591px;
     max-width: 100%;
+    transition: transform 0.3s ease, opacity 0.4s ease;
 }
 
 .btn-primary {
@@ -95,10 +116,27 @@ body {
     border-radius: 40px;
     text-decoration: none;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-primary:hover { opacity: 0.92; }
+.btn-primary:hover {
+    opacity: 0.95;
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 4px;
+}
+
+.btn-primary.btn-clicked {
+    transform: scale(0.96);
+}
 
 /* Hero image — Figma x:577 y:-123 801×796 */
 .hero-image {
@@ -108,6 +146,14 @@ body {
     width: 850px;
     height: 715px;
     z-index: 0;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: transform 0.4s ease;
+}
+
+.hero-image:hover {
+    transform: scale(1.02);
 }
 
 .hero-img {
@@ -115,6 +161,11 @@ body {
     height: 100%;
     display: block;
     object-fit: fill;
+    transition: transform 0.5s ease;
+}
+
+.hero-image:hover .hero-img {
+    transform: scale(1.05);
 }
 
 /* Stats dentro do frame da imagem */
@@ -128,6 +179,14 @@ body {
     padding: 16px;
     /* background: rgba(255, 255, 255, 0.5); */
     border-radius: 24px;
+    cursor: default;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stat:hover {
+    transform: scale(1.08);
+    /* background: rgba(255, 255, 255, 0.7); */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .stat-num {
@@ -177,6 +236,21 @@ body {
     padding: 1px;
     border-radius: 16px;
     background: linear-gradient(141deg, rgba(89, 89, 89, 0.9) 0%, rgba(255, 255, 255, 0.25) 100%);
+    cursor: pointer;
+    transition: opacity 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card:active {
+    transform: translateY(-4px);
+}
+
+.card.card-clicked .card-inner {
+    box-shadow: inset 2px 2px 20px 0 rgba(255, 255, 255, 0.3), inset -6px -6px 20px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Interior: fill gradiente 180deg + inset shadow (effect do Figma) */
@@ -189,6 +263,11 @@ body {
     background:  linear-gradient(0deg, rgb(0 0 0) 0%, rgb(54 53 53 / 0%) 100%);
     box-shadow: inset 4px 4px 24px 0 rgba(255, 255, 255, 0.2), inset -8px -8px 24px 0 rgba(0, 0, 0, 0.25);
     min-height: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover .card-inner {
+    box-shadow: inset 4px 4px 28px 0 rgba(255, 255, 255, 0.25), inset -8px -8px 24px 0 rgba(0, 0, 0, 0.25);
 }
 
 .card-icon {
@@ -196,6 +275,11 @@ body {
     height: 32px;
     display: block;
     flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-icon {
+    transform: scale(1.15) rotate(12deg);
 }
 
 .card-title {

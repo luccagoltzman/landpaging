@@ -1,91 +1,109 @@
-// Parallax Effect
-document.addEventListener('mousemove', (e) => {
-    const parallaxWrapper = document.querySelector('.parallax-wrapper');
-    if (!parallaxWrapper) return;
+/**
+ * Interações — Território 2030
+ * Animações de entrada, parallax, hover e clique
+ */
 
-    const layers = document.querySelectorAll('.parallax-layer');
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
+(function () {
+    'use strict';
 
-    // Calculate mouse position relative to center (in percentage)
-    const moveX = (mouseX - centerX) / centerX;
-    const moveY = (mouseY - centerY) / centerY;
-
-    layers.forEach(layer => {
-        const speed = parseFloat(layer.getAttribute('data-speed')) || 1;
-        const x = moveX * 50 * speed;
-        const y = moveY * 50 * speed;
-        layer.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${1 + speed})`;
-    });
-});
-
-// Scroll Parallax Effect
-window.addEventListener('scroll', () => {
-    const parallax = document.getElementById('parallax');
-    if (!parallax) return;
-
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * 0.5;
-
-    // Move layers at different speeds
-    document.querySelectorAll('.parallax-layer').forEach(layer => {
-        const speed = parseFloat(layer.getAttribute('data-speed')) || 1;
-        const yPos = -(rate * speed);
-        layer.style.transform = `translate3d(0, ${yPos}px, 0) scale(${1 + speed})`;
-    });
-
-    // Add subtle rotation to floating icons
-    document.querySelectorAll('.floating-icon').forEach(icon => {
-        const rotation = Math.sin(scrolled * 0.002) * 5;
-        icon.style.transform = `rotate(${rotation}deg)`;
-    });
-});
-
-// Adiciona partículas em movimento
-function createParticle() {
-    const particles = document.querySelector('.particles');
-    if (!particles) return;
-
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    
-    // Estilo da partícula
-    particle.style.cssText = `
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3});
-        border-radius: 50%;
-        pointer-events: none;
-        left: ${Math.random() * 100}%;
-        top: -10px;
-        animation: fall ${Math.random() * 3 + 2}s linear forwards;
-    `;
-
-    particles.appendChild(particle);
-
-    // Remove a partícula após a animação
-    particle.addEventListener('animationend', () => {
-        particle.remove();
-    });
-}
-
-// Cria partículas periodicamente
-setInterval(createParticle, 100);
-
-// Adiciona keyframes para animação das partículas
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fall {
-        from {
-            transform: translateY(0) rotate(0deg);
+    // --- Animações ao entrar na viewport (Intersection Observer) ---
+    function initScrollAnimations() {
+        var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reducedMotion) {
+            document.querySelectorAll('.content, .hero-image, .cards, .card').forEach(function (el) {
+                el.classList.add('is-visible');
+            });
+            return;
         }
-        to {
-            transform: translateY(100vh) rotate(360deg);
-            opacity: 0;
-        }
+
+        var observer = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            },
+            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        var content = document.querySelector('.content');
+        var heroImage = document.querySelector('.hero-image');
+        var cards = document.querySelector('.cards');
+        var cardItems = document.querySelectorAll('.card');
+
+        if (content) observer.observe(content);
+        if (heroImage) observer.observe(heroImage);
+        if (cards) observer.observe(cards);
+        cardItems.forEach(function (card) {
+            observer.observe(card);
+        });
     }
-`;
-document.head.appendChild(style); 
+
+    // --- Parallax suave no círculo amarelo (movimento do mouse) ---
+    function initParallaxCircle() {
+        var circle = document.querySelector('.circle-bg');
+        if (!circle) return;
+
+        document.addEventListener('mousemove', function (e) {
+            var x = (e.clientX / window.innerWidth - 0.5) * 12;
+            var y = (e.clientY / window.innerHeight - 0.5) * 12;
+            circle.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+        });
+    }
+
+    // --- Botão "Get started": feedback de clique ---
+    function initButtonFeedback() {
+        var btn = document.querySelector('.btn-primary');
+        if (!btn) return;
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            btn.classList.add('btn-clicked');
+            setTimeout(function () {
+                btn.classList.remove('btn-clicked');
+            }, 300);
+        });
+    }
+
+    // --- Cards: feedback de clique (opcional) ---
+    function initCardClick() {
+        document.querySelectorAll('.card').forEach(function (card) {
+            card.addEventListener('click', function () {
+                card.classList.add('card-clicked');
+                setTimeout(function () {
+                    card.classList.remove('card-clicked');
+                }, 400);
+            });
+        });
+    }
+
+    // --- Hero image: clique abre em nova aba (opcional) ou só hover ---
+    function initHeroImageClick() {
+        var hero = document.querySelector('.hero-image');
+        if (!hero) return;
+        hero.setAttribute('role', 'button');
+        hero.setAttribute('tabindex', '0');
+        hero.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                hero.click();
+            }
+        });
+    }
+
+    // --- Inicialização ao carregar a página ---
+    function init() {
+        initScrollAnimations();
+        initParallaxCircle();
+        initButtonFeedback();
+        initCardClick();
+        initHeroImageClick();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
