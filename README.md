@@ -1,98 +1,76 @@
-# Landing Page Moderna
+# Lucca Goltzman — Portfólio Web Design
 
-Uma landing page moderna, responsiva e com design premium desenvolvida usando HTML, CSS e JavaScript puro. O projeto apresenta uma interface limpa e sofisticada com foco em UI/UX.
+Landing page em tema escuro para demonstração de conhecimentos em **web design**: layout baseado em Figma, HTML semântico, CSS moderno e interações em JavaScript puro.
 
-## Características
+## Sobre o projeto
 
-- Design moderno e minimalista
-- Totalmente responsivo (mobile, tablet e desktop)
-- Animações suaves e efeitos de parallax
-- Performance otimizada
-- Código limpo e bem organizado
-- Sem dependências externas
-
-## Estrutura do Projeto
-
-```
-landpaging/
-├── index.html
-├── styles/
-│   └── main.css
-├── js/
-│   └── main.js
-└── README.md
-```
+- **Objetivo:** Portfólio para GitHub mostrando habilidades em UI/UX, layout responsivo, HTML, CSS e JavaScript.
+- **Design:** Baseado no arquivo Figma
+- **Stack:** Apenas HTML, CSS e JavaScript; sem frameworks nem dependências externas além do Google Fonts (Bitter).
 
 ## Funcionalidades
 
-- Header fixo com navegação suave
-- Hero section com animações
-- Seção de features com cards animados
-- Seção parallax com efeito de profundidade
-- Seção de depoimentos
-- Footer com links sociais
-- Animações de entrada em elementos
-- Efeitos hover em botões e cards
-- Design responsivo adaptativo
+- **Layout fiel ao Figma:** Hero com título, subtítulo e CTA; imagem em destaque com stats (50+, 100%); quatro cards de habilidades (UI & UX, Layout responsivo, HTML/CSS/JS, Performance).
+- **Efeito 3D (hover):** Imagem do hero e cards inclinam em diferentes ângulos conforme a posição do mouse (rotateX/rotateY + translateZ), com perspectiva e sensação de profundidade.
+- **Animações de entrada:** Conteúdo, imagem e cards ganham animação ao entrar na viewport (Intersection Observer).
+- **Parallax no círculo:** Elemento decorativo amarelo (circle-bg) desloca-se levemente com o movimento do mouse.
+- **Interações:** Hover e clique no botão e nos cards; transições suaves; respeito a `prefers-reduced-motion`.
+- **Responsivo:** Ajustes para tablet e mobile (layout empilhado, elementos reposicionados).
 
-## Como Usar
+## Estrutura do projeto
+
+```
+landpaging/
+├── index.html          # Página única (hero, stats, cards)
+├── styles/
+│   └── main.css        # Estilos, variáveis, responsivo e efeitos 3D
+├── scripts/
+│   └── main.js         # Animações, parallax, tilt 3D, feedback de clique
+├── assets/
+│   ├── circle-bg.svg   # Círculo amarelo com blur (Figma)
+│   ├── card-icon.svg   # Ícone estrela dos cards (Figma)
+│   └── images/
+│       ├── unsplash_fn--TuQvBZ0.png   # Imagem do hero (cenário espacial)
+│       └── hero/       # Pasta para imagens do hero (ex.: imgHero.svg)
+└── README.md
+```
+
+## Como usar
 
 1. Clone o repositório:
-```bash
-git clone [https://github.com/luccagoltzman/landpaging.git]
-```
+   ```bash
+   git clone https://github.com/luccagoltzman/landpaging.git
+   cd landpaging
+   ```
 
-2. Navegue até a pasta do projeto:
-```bash
-cd landpaging
-```
+2. Abra o `index.html` no navegador ou use um servidor local (ex.: extensão Live Server no VS Code).
 
-3. Abra o arquivo `index.html` em seu navegador ou use um servidor local.
+Não há build nem instalação de dependências.
+
+## Tecnologias e técnicas
+
+| Área        | Detalhes |
+|------------|----------|
+| **HTML**   | Semântico, acessível (alt, roles, focus), meta description |
+| **CSS**    | Variáveis (`--bg`, `--text`), Flexbox/Grid, `perspective` e `transform-style: preserve-3d`, media queries, `prefers-reduced-motion` |
+| **JS**     | Vanilla JS: Intersection Observer, `mousemove`/`mouseleave` para 3D tilt, feedback de clique |
 
 ## Personalização
 
-### Cores
-As cores principais podem ser alteradas através das variáveis CSS no arquivo `styles/main.css`:
-
-```css
-:root {
-    --primary-color: #1a1a1a;
-    --secondary-color: #f5f5f5;
-    --accent-color: #646cff;
-    --text-color: #333;
-}
-```
-
-### Fontes
-O projeto utiliza as fontes Inter e Poppins do Google Fonts. Para alterar as fontes, modifique os links no `<head>` do arquivo `index.html` e atualize as referências no CSS.
-
-### Imagens
-Para substituir as imagens placeholder:
-1. Adicione suas imagens ao projeto
-2. Atualize os caminhos das imagens no HTML e CSS conforme necessário
+- **Cores:** Variáveis no início de `styles/main.css` (`:root`).
+- **Textos:** Edite diretamente no `index.html` (título, subtítulo, stats, títulos e descrições dos cards).
+- **Imagem do hero:** Substitua `assets/images/unsplash_fn--TuQvBZ0.png` ou altere o `src` no HTML.
 
 ## Compatibilidade
 
-- Chrome (última versão)
-- Firefox (última versão)
-- Safari (última versão)
-- Edge (última versão)
-- Responsivo para dispositivos móveis
-
-## Contribuição
-
-Sinta-se à vontade para contribuir com o projeto. Toda contribuição é bem-vinda!
-
-1. Faça um Fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+- Navegadores modernos (Chrome, Firefox, Safari, Edge).
+- Layout e interações testados em desktop; responsivo para tablets e celulares.
+- Efeitos 3D desativados automaticamente quando o usuário preferir menos movimento (`prefers-reduced-motion: reduce`).
 
 ## Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+Este projeto está sob a licença MIT.
 
 ---
 
-Desenvolvido por [luccagoltzman]
+*Projeto de portfólio para demonstração de conhecimentos em web design.*
