@@ -138,22 +138,23 @@ body {
     transform: scale(0.96);
 }
 
-/* Hero image — Figma x:577 y:-123 801×796 */
+/* Hero image — Figma x:577 y:-123 801×796 + efeito 3D */
 .hero-image {
     position: absolute;
     left: 605px;
     top: -123px;
     width: 850px;
-    height: 715px;
+    height: 750px;
     z-index: 0;
     cursor: pointer;
     overflow: hidden;
     border-radius: 12px;
-    transition: transform 0.4s ease;
+    transition: transform 0.35s ease-out;
+    transform-style: preserve-3d;
 }
 
 .hero-image:hover {
-    transform: scale(1.02);
+    transform: perspective(1000px) scale(1.02) translateZ(0) rotateX(0deg) rotateY(0deg);
 }
 
 .hero-img {
@@ -162,6 +163,7 @@ body {
     display: block;
     object-fit: fill;
     transition: transform 0.5s ease;
+    transform-style: preserve-3d;
 }
 
 .hero-image:hover .hero-img {
@@ -218,7 +220,7 @@ body {
     top: 601px;
 }
 
-/* Cards — Figma x:63 y:722 row gap 24px (Frame 14403) */
+/* Cards — Figma x:63 y:722 row gap 24px (Frame 14403) + contexto 3D */
 .cards {
     position: absolute;
     left: 63px;
@@ -227,9 +229,10 @@ body {
     display: flex;
     flex-direction: row;
     gap: 24px;
+    perspective: 1000px;
 }
 
-/* Wrapper: borda 1px em gradiente 141deg (stroke do Figma) */
+/* Wrapper: borda 1px em gradiente 141deg (stroke do Figma) + efeito 3D */
 .card {
     width: 310px;
     flex-shrink: 0;
@@ -237,16 +240,18 @@ body {
     border-radius: 16px;
     background: linear-gradient(141deg, rgba(89, 89, 89, 0.9) 0%, rgba(255, 255, 255, 0.25) 100%);
     cursor: pointer;
-    transition: opacity 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: opacity 0.5s ease, transform 0.3s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
 
 .card:hover {
-    transform: translateY(-8px);
+    transform: perspective(1000px) translateY(-8px) translateZ(0) rotateX(0deg) rotateY(0deg);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
 }
 
 .card:active {
-    transform: translateY(-4px);
+    transform: perspective(1000px) translateY(-4px) rotateX(0deg) rotateY(0deg);
 }
 
 .card.card-clicked .card-inner {
@@ -260,10 +265,12 @@ body {
     gap: 16px;
     padding: 24px 22px;
     border-radius: 15px;
-    background:  linear-gradient(0deg, rgb(0 0 0) 0%, rgb(54 53 53 / 0%) 100%);
+    background: linear-gradient(0deg, rgb(0 0 0) 0%, rgb(54 53 53 / 0%) 100%);
     box-shadow: inset 4px 4px 24px 0 rgba(255, 255, 255, 0.2), inset -8px -8px 24px 0 rgba(0, 0, 0, 0.25);
     min-height: 0;
     transition: box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
 
 .card:hover .card-inner {
